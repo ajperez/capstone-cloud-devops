@@ -5,7 +5,7 @@ pipeline {
 		stage('Lint HTML') {
 			steps {
 				sh 'tidy -q -e ./index.html'
-				sh 'pylint --disable=R,C,W1203,W1202 app.py.'
+				sh '/usr/local/bin/pylint --disable=R,C,W1203,W1202 app.py.'
 			}
 		}
 		
