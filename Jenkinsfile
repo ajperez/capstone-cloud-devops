@@ -2,7 +2,13 @@ pipeline {
 	agent any
 	stages {
 
-	
+		stage('Lint HTML') {
+			steps {
+				sh 'tidy -q -e ./index.html'
+				sh 'pylint --disable=R,C,W1203	app.py'
+			}
+		}
+		
 		stage('Build Docker Image') {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
