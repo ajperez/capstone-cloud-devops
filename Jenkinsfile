@@ -12,7 +12,7 @@ pipeline {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
-						docker build -t ajpm1977/capstone-devops .
+						sudo docker build -t ajpm1977/capstone-devops .
 					'''
 				}
 			}
@@ -22,7 +22,7 @@ pipeline {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
-						docker push ajpm1977/capstone-devops
+						sudo docker push ajpm1977/capstone-devops
 					'''
 				}
 			}
