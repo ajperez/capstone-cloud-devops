@@ -11,8 +11,8 @@ pipeline {
 		stage('Build Docker Image') {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
-					sh '''
-						echo 'build docker image'
+					echo '''
+						build docker image
 					'''
 				}
 			}
@@ -21,8 +21,8 @@ pipeline {
 		stage('Push Image To Dockerhub') {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
-					sh '''
-						echo 'push image to dockerhub'
+					echo '''
+						push image to dockerhub
 					'''
 				}
 			}
@@ -31,8 +31,8 @@ pipeline {
 		stage('Create AWS kubernetes cluster') {
 			steps {
 				withAWS(region:'us-east-1', credentials:'aws-static') {
-					sh '''
-						echo 'Crear kubernetes cluster'
+					echo '''
+						Crear kubernetes cluster
 					'''
 				}
 			}
@@ -43,8 +43,8 @@ pipeline {
 		stage('Create config file for cluster') {
 			steps {
 				withAWS(region:'us-east-1', credentials:'aws-static') {
-					sh '''
-						echo 'crear config file para el cluster'
+					echo '''
+						crear config file para el cluster
 					'''
 				}
 			}
@@ -53,8 +53,8 @@ pipeline {
 		stage('Set current kubectl context') {
 			steps {
 				withAWS(region:'us-east-1', credentials:'aws-static') {
-					sh '''
-						echo 'asigno el contexto AWS a kubectl'
+					echo '''
+						asigno el contexto AWS a kubectl
 					'''
 				}
 			}
@@ -63,8 +63,8 @@ pipeline {
         stage ('Upload latest green deployment to AWS Loadbalancer') {
             steps {
                script {
-                   sh '''
-				   echo 'subo desarrollo verde al balanceador de carga'
+                   echo '''
+				   		subo desarrollo verde al balanceador de carga
 				   '''
                }
             }
@@ -73,8 +73,8 @@ pipeline {
         stage ('Remove old blue deployment from AWS Loadbalancer') {
             steps {
                script {
-                   sh '''
-				   echo 'borro desarrollo azul del balanceador de carga'
+                   echo '''
+				   		borro desarrollo azul del balanceador de carga
 				   '''
                }
             }
@@ -83,8 +83,8 @@ pipeline {
         stage ('Add latest blue deployment to AWS Loadbalancer') {
             steps {
                script {
-                   sh '''
-				   echo 'subo desarrollo azul al balanceador de carga'
+                   echo '''
+				   		subo desarrollo azul al balanceador de carga
 				   '''
                }
             }
@@ -93,8 +93,8 @@ pipeline {
         stage ('Remove old green deployment from AWS Loadbalancer') {
             steps {
                script {
-                   sh '''
-				   echo 'borro desarrollo verde del balanceador de carga'
+                   echo '''
+				   		borro desarrollo verde del balanceador de carga
 				   '''
                }
             }
