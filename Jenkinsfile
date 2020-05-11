@@ -11,8 +11,8 @@ pipeline {
 		stage('Build Docker Image') {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
-					sh '''
-						sudo docker build -t ajpm1977/capstone-devops .
+					sudo sh '''
+						docker build -t ajpm1977/capstone-devops .
 					'''
 				}
 			}
@@ -21,8 +21,8 @@ pipeline {
 		stage('Push Image To Dockerhub') {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
-					sh '''
-						sudo docker push ajpm1977/capstone-devops
+					sudo sh '''
+						docker push ajpm1977/capstone-devops
 					'''
 				}
 			}
