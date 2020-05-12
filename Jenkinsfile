@@ -62,11 +62,11 @@ pipeline {
 
         stage ('Green deployment to AWS Loadbalancer') {
             steps {
-               script {
+               withAWS(region:'us-east-1', credentials:'aws-static') {
                    echo '''
 				   		subo desarrollo verde al balanceador de carga
 				   '''
-				sh 'kubectl apply -f green-deploy.yml'
+					sh 'kubectl apply -f green-deploy.yml'
 
                }
             }
@@ -74,7 +74,7 @@ pipeline {
 
         stage ('Remove blue deployment from AWS Loadbalancer') {
             steps {
-               script {
+               withAWS(region:'us-east-1', credentials:'aws-static') {
                    echo '''
 				   		borro desarrollo azul del balanceador de carga
 				   '''
@@ -85,7 +85,7 @@ pipeline {
 
         stage ('Add blue deployment to AWS Loadbalancer') {
             steps {
-               script {
+               withAWS(region:'us-east-1', credentials:'aws-static') {
                    echo '''
 				   		subo desarrollo azul al balanceador de carga
 				   '''
@@ -96,7 +96,7 @@ pipeline {
 
         stage ('Remove green deployment from AWS Loadbalancer') {
             steps {
-               script {
+               withAWS(region:'us-east-1', credentials:'aws-static') {
                    echo '''
 				   		borro desarrollo verde del balanceador de carga
 				   '''
