@@ -61,10 +61,7 @@ pipeline {
 				withAWS(region:'us-east-1', credentials:'aws-static') {
 					echo '''
 						crear config file para el cluster
-					'''
-					sh '''
-						aws eks --region us-east-1 update-kubeconfig --name cluster-ajpm
-					'''					
+					'''				
 				}
 			}
 		}
@@ -85,6 +82,9 @@ pipeline {
                    echo '''
 				   		subo desarrollo verde al balanceador de carga
 				   '''
+				   sh '''
+						kubectl config use-context arn:aws:eks:us-east-1:082521614617:cluster/cluster-ajpm
+					'''
                }
             }
         }
