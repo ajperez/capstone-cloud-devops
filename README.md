@@ -35,5 +35,5 @@ Previous to deploy it's necesary to install:
 
 * Jenkinsfile :  Pipeline file
 * Dockerfile: file to build the docker image
-* green-deploy: Set up a replication controller green pod and the green service
-* blue-deploy: Set up a replication controller blue pod and the blue service
+* green-deploy.yml: Set up a replication controller green pod and the green service
+* blue-deploy.yml: Set up a replication controller blue pod and the blue service
