@@ -39,7 +39,7 @@ pipeline {
 						eksctl create cluster \
 						--name cluster-ajpm \
 						--version 1.13 \
-						--nodegroup-name standard-workers \
+						--nodegroup-name workers-ajpm \
 						--node-type t2.small \
 						--nodes 2 \
 						--nodes-min 1 \
