@@ -60,45 +60,47 @@ pipeline {
 			}
 		}
 
-        stage ('Upload latest green deployment to AWS Loadbalancer') {
+        stage ('Green deployment to AWS Loadbalancer') {
             steps {
                script {
                    echo '''
 				   		subo desarrollo verde al balanceador de carga
 				   '''
-				   sh '''
-						kubectl config use-context arn:aws:eks:us-east-1:082521614617:cluster/cluster-ajpm
-					'''
+				sh 'kubectl apply -f green-deploy.yml'
+
                }
             }
         }
 
-        stage ('Remove old blue deployment from AWS Loadbalancer') {
+        stage ('Remove blue deployment from AWS Loadbalancer') {
             steps {
                script {
                    echo '''
 				   		borro desarrollo azul del balanceador de carga
 				   '''
+				   sh 'kubectl delete deploy/deployment-blue'
                }
             }
         }
 
-        stage ('Add latest blue deployment to AWS Loadbalancer') {
+        stage ('Add blue deployment to AWS Loadbalancer') {
             steps {
                script {
                    echo '''
 				   		subo desarrollo azul al balanceador de carga
 				   '''
+				   sh 'kubectl apply -f blue-deploy.yml'
                }
             }
         }
 
-        stage ('Remove old green deployment from AWS Loadbalancer') {
+        stage ('Remove green deployment from AWS Loadbalancer') {
             steps {
                script {
                    echo '''
 				   		borro desarrollo verde del balanceador de carga
 				   '''
+				   sh 'kubectl delete deploy/deployment-green'
                }
             }
         }
